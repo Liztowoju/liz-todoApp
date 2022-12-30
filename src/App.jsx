@@ -13,46 +13,59 @@ function App() {
   const [filteredTodos, setFilteredTodos] = useState([])
 
   // useEffect{
-useEffect(function(){
-filterHandler()
-}, [status, todos])
+  useEffect(function () {
+    filterHandler()
+    saveLocalTodos()
+  }, [status, todos])
 
 
 
-//function
-function filterHandler() {
-  switch (status) {
-    case 'completed':
-      setFilteredTodos(todos.filter(function (todo) {
-        return todo.completed
-      }))
-      break;
-    case 'uncompleted':
-      setFilteredTodos(todos.filter(function (todo) {
-        return !todo.completed
-      }))
-      break;
-    default:
-      setFilteredTodos(todos)
-      break;
+  //function
+  function filterHandler() {
+    switch (status) {
+      case 'completed':
+        setFilteredTodos(todos.filter(function (todo) {
+          return todo.completed
+        }))
+        break;
+      case 'uncompleted':
+        setFilteredTodos(todos.filter(function (todo) {
+          return !todo.completed
+        }))
+        break;
+      default:
+        setFilteredTodos(todos)
+        break;
+    }
   }
-}
+  // save to local storage
+  function saveLocalTodos() {
+    localStorage.setItem('todos', JSON.stringify(todos))
+  }
+  function getLocalTodos() {
+    if (localStorage.getItem('todos' === null)) {
+      localStorage.setItem('todos', JSON.stringify([]))
+    } else {
+      let todoLocal = JSON.parse(localStorage.getItem('todos'))
+      setTodos(todoLocal)
+    }
+  }
 
-return (
-  <div className='react'>
-    <header>
-      <h1>Liz' Todo List</h1>
-    </header>
-    <Form
-      todos={todos}
-      setTodos={setTodos}
-      inputText={inputText}
-      setInputText={setInputText}
-      setStatus={setStatus}
-    />
-    <Todos todos={todos} setTodos={setTodos} />
-  </div >
-)
+  return (
+    <div className='react'>
+      <header>
+        <h1>Liz' Todo List</h1>
+      </header>
+      <Form
+        todos={todos}
+        setTodos={setTodos}
+        inputText={inputText}
+        setInputText={setInputText}
+        setStatus={setStatus}
+      />
+      <Todos filteredTodos={filteredTodos} todos={todos} setTodos={setTodos} />
+    </div >
+  )
 }
 
 export default App
