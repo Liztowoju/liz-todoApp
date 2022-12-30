@@ -12,10 +12,14 @@ export default function Form({ inputText, setInputText, todos, setTodos, setStat
 
   function submitTodoHandler(e) {
     e.preventDefault()
+    if (inputText === ''){
+      return false
+    }else{
     setTodos([
       ...todos,
       { text: inputText, completed: false, id: nanoid() }
     ])
+  }
     setInputText('')
   }
   function statusHandler(e){
