@@ -39,7 +39,8 @@ function App() {
         break;
     }
   }
-  // save to local storage
+
+//local storage
   function saveLocalTodos() {
     localStorage.setItem('todos', JSON.stringify(todos))
   }
@@ -55,7 +56,7 @@ function App() {
   return (
     <div className='react'>
       <header>
-        <h1>Liz' Todo List</h1>
+        <h1>Daily Todo List</h1>
       </header>
       <Form
         todos={todos}
