@@ -8,6 +8,7 @@ function App() {
 
   // state 
   const [inputText, setInputText] = useState('')
+  const [editText, setEditText] = useState('')
   const [todos, setTodos] = useState([])
   const [status, setStatus] = useState('all')
   const [filteredTodos, setFilteredTodos] = useState([])
